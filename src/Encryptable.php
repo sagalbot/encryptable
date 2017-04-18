@@ -11,7 +11,7 @@ use Crypt;
  * decrypted when accessed, or when the model
  * is converted toJson() or toArray().
  *
- * Encryption is handled by the Crypt facade, which
+ * Encryption is handled by the Crypt helper function, which
  * uses the cipher/key defined in config/app.php.
  *
  * Class Encryptable
@@ -25,7 +25,7 @@ trait Encryptable
      *
      * @return bool
      */
-    protected function isEncryptable($key)
+    public function encryptable($key)
     {
         return in_array($key, $this->encryptable);
     }
@@ -40,7 +40,7 @@ trait Encryptable
      */
     protected function decryptAttribute($value)
     {
-        $value = Crypt::decrypt($value);
+        $value = decrypt($value);
 
         return $value;
     }
@@ -55,7 +55,7 @@ trait Encryptable
      */
     protected function encryptAttribute($value)
     {
-        $value = Crypt::encrypt($value);
+        $value = encrypt($value);
 
         return $value;
     }
@@ -63,7 +63,7 @@ trait Encryptable
 
     /**
      * Extend the Eloquent method so properties present in
-     * $encryptable are decrypted when directly accessed.
+     * $encrypt are decrypted when directly accessed.
      *
      * @param $key  The attribute key
      *
@@ -73,7 +73,7 @@ trait Encryptable
     {
         $value = parent::getAttribute($key);
 
-        if ($this->isEncryptable($key)) {
+        if ($this->encryptable($key)) {
             $value = $this->decryptAttribute($value);
         }
 
@@ -83,7 +83,7 @@ trait Encryptable
 
     /**
      * Extend the Eloquent method so properties present in
-     * $encryptable are encrypted whenever they are set.
+     * $encrypt are encrypted whenever they are set.
      *
      * @param $key      The attribute key
      * @param $value    Attribute value to set
@@ -92,7 +92,7 @@ trait Encryptable
      */
     public function setAttribute($key, $value)
     {
-        if ($this->isEncryptable($key)) {
+        if ($this->encryptable($key)) {
             $value = $this->encryptAttribute($value);
         }
 
@@ -102,7 +102,7 @@ trait Encryptable
 
     /**
      * Extend the Eloquent method so properties in
-     * $encryptable are decrypted when toArray()
+     * $encrypt are decrypted when toArray()
      * or toJson() is called.
      *
      * @return mixed
@@ -112,7 +112,7 @@ trait Encryptable
         $attributes = parent::getArrayableAttributes();
 
         foreach ($attributes as $key => $attribute) {
-            if ($this->isEncryptable($key)) {
+            if ($this->encryptable($key)) {
                 $attributes[$key] = $this->decryptAttribute($attribute);
             }
         }
