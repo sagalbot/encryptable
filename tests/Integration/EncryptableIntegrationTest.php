@@ -2,6 +2,7 @@
 
 namespace Tests\Integration;
 
+use Tests\Framework\CustomEncryptionModel;
 use Tests\Framework\EncryptableModel;
 
 /**
@@ -15,13 +16,7 @@ class EncryptableIntegrationTest extends IntegrationTestCase
     public function it_should_encrypt_properties_listed_in_the_encryptable_array_when_persisting_data()
     {
         EncryptableModel::create([ 'secret' => 'foo' ]);
-        $savedSecret = $this->db()
-                            ->getConnection('default')
-                            ->table('encryptable_models')
-                            ->select('secret')
-                            ->first()->secret;
-
-        $this->assertNotContains('foo', $savedSecret);
+        $this->assertNotContains('foo', $this->getSavedSecret());
     }
 
 
@@ -62,13 +57,7 @@ class EncryptableIntegrationTest extends IntegrationTestCase
     public function it_can_store_arrays_as_serialized_and_encrypted_strings()
     {
         EncryptableModel::create([ 'secret' => [ 'foo' => 'bar' ] ]);
-        $savedSecret = $this->db()
-                            ->getConnection('default')
-                            ->table('encryptable_models')
-                            ->select('secret')
-                            ->first()->secret;
-
-        $this->assertNotContains(serialize([ 'foo' => 'bar' ]), $savedSecret);
+        $this->assertNotContains(serialize([ 'foo' => 'bar' ]), $this->getSavedSecret());
     }
 
 
@@ -79,5 +68,38 @@ class EncryptableIntegrationTest extends IntegrationTestCase
         $fromDB = EncryptableModel::find($model->id);
 
         $this->assertEquals($fromDB->secret, [ 'foo' => 'bar' ]);
+    }
+
+
+    /** @test */
+    public function it_can_use_a_custom_encryption_method()
+    {
+        $model = CustomEncryptionModel::create([ 'secret' => 'foo' ]);
+        $this->assertEquals('encrypted', $this->getSavedSecret());
+    }
+
+
+    /** @test */
+    public function it_can_use_a_custom_decryption_method()
+    {
+        $model = CustomEncryptionModel::create([ 'secret' => 'foo' ]);
+        $this->assertEquals('decrypted', $model->secret);
+    }
+
+
+    /**
+     * Get the secret of the first model in the DB.
+     * DB is reset between tests, so we can just
+     * grab the first one.
+     *
+     * @return mixed
+     */
+    private function getSavedSecret()
+    {
+        return $this->db()
+                    ->getConnection('default')
+                    ->table('encryptable_models')
+                    ->select('secret')
+                    ->first()->secret;
     }
 }
