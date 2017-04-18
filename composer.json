@@ -21,7 +21,7 @@
     "illuminate/encryption": "^5.4"
   },
   "keywords": [
-    "laravel"
+    "laravel", "laravel 5", "eloquent", "encryption"
   ],
   "license": "MIT",
   "authors": [
