@@ -1,5 +1,5 @@
 {
-  "name": "sagalbot/encryptable-eloquent",
+  "name": "sagalbot/encryptable",
   "description": "Allows you to store Eloquent properties encrypted in your database, and automatically decrypt when accessed.",
   "type": "library",
   "autoload": {
