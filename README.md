@@ -1,7 +1,7 @@
 # Encryptable Eloquent Model Properties [![Build Status](https://travis-ci.org/sagalbot/encryptable.svg?branch=master)](https://travis-ci.org/sagalbot/encryptable)
 This Laravel 5 package allows you to store Eloquent model properties encrypted in your database, and automatically decrypts them when you need to access them.
 
-![screen shot 2017-04-18 at 7 11 45 pm](https://cloud.githubusercontent.com/assets/692538/25160470/04ed0cac-246b-11e7-81ca-2082a05301d9.png) 
+![example](https://cloud.githubusercontent.com/assets/692538/25161342/4676ca96-2470-11e7-93d7-c1b5f0bd1e98.png)
  
 ## Install
 
