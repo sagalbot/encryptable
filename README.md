@@ -74,7 +74,7 @@ protected function encryptAttribute($value)
  */
 protected function decryptAttribute($value)
 {
-    //  decrypt te value
+    //  decrypt the value
 }
 ```
 
