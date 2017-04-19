@@ -29,7 +29,7 @@ This package is really just a simple trait and property that you can add to your
     protected $encryptable = ['myEncryptedProperty'];
     ```
     
-4. That's it! Here's a complete example on the default `User` model:
+4. That's it! Here's a complete example:
 
     ```php
     <?php
@@ -49,7 +49,7 @@ This package is really just a simple trait and property that you can add to your
          *
          * @var array
          */
-        protected $encryptable = [ 'secret', 'another-secret' ];
+        protected $encryptable = [ 'something_secret', 'another_secret' ];
     }
     ```
     
