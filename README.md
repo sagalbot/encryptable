@@ -1,5 +1,7 @@
 # Encryptable Eloquent Model Properties [![Build Status](https://travis-ci.org/sagalbot/encryptable.svg?branch=master)](https://travis-ci.org/sagalbot/encryptable)
 This Laravel 5 package allows you to store Eloquent model properties encrypted in your database, and automatically decrypts them when you need to access them.
+
+![screen shot 2017-04-18 at 7 11 45 pm](https://cloud.githubusercontent.com/assets/692538/25160470/04ed0cac-246b-11e7-81ca-2082a05301d9.png) 
  
 ## Install
 
@@ -55,7 +57,7 @@ This package is really just a simple trait and property that you can add to your
     
 ## Encryption Options
 
-By default, the package uses the global `encrypt()` and `decrypt()` Laravel functions, which are just aliases to resolve the `Illuminate\Encryption\Encrypter::class` out of the container. By default, Laravel's encrypter uses OpenSSL to provide AES-256 and AES-128 encryption, which you can read more about at the [Laravel Docs](https://laravel.com/docs/5.4/encryption). 
+By default, the package uses the global `encrypt()` and `decrypt()` Laravel functions, which are just aliases to resolve the `Illuminate\Encryption\Encrypter::class` out of the container. Laravel's encrypter uses OpenSSL to provide AES-256 and AES-128 encryption, which you can read more about at the [Laravel Docs](https://laravel.com/docs/5.4/encryption). 
 
 If you need to adjust how a specific model encrypts and decrypts its properties, you can override the `decryptAttribute` and `encryptAttribute` methods on your model:  
 
