@@ -28,7 +28,7 @@ This package is really just a simple trait and property that you can add to your
 3. Set the `$encryptable` array on your Model.
 
     ```php
-    protected $encryptable = ['myEncryptedProperty'];
+    protected $encryptable = ['my_encrypted_property'];
     ```
     
 4. That's it! Here's a complete example:
@@ -51,7 +51,7 @@ This package is really just a simple trait and property that you can add to your
          *
          * @var array
          */
-        protected $encryptable = [ 'something_secret', 'another_secret' ];
+        protected $encryptable = [ 'my_encrypted_property', 'another_secret' ];
     }
     ```
     
