@@ -19,11 +19,23 @@ class CustomEncryptionModel extends Model
 
     protected $table = 'encryptable_models';
 
+
+    /**
+     * @param $value
+     *
+     * @return string
+     */
     protected function encryptAttribute($value)
     {
         return "encrypted";
     }
 
+
+    /**
+     * @param $value
+     *
+     * @return string
+     */
     protected function decryptAttribute($value)
     {
         return "decrypted";
