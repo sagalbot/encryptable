@@ -13,9 +13,6 @@ use Crypt;
  *
  * Encryption is handled by the Crypt helper function, which
  * uses the cipher/key defined in config/app.php.
- *
- * Class Encryptable
- * @package SC2
  */
 trait Encryptable
 {
